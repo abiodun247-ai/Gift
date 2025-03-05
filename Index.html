@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Christiana, My Love</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(45deg, #ff66b2, #ff99cc, #ffccff, #ff66b2);
+            background-size: 400% 400%;
+            animation: gradientBG 10s infinite alternate;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: left; }
+            100% { background-position: right; }
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+            background: white;
+            border: 10px solid #ff3399;
+            border-radius: 20px;
+            box-shadow: 0 0 20px #ff3399;
+        }
+
+        .christiana-name {
+            font-size: 50px;
+            font-weight: bold;
+            color: #ff3399;
+            text-shadow: 0 0 10px #ff99cc, 0 0 20px #ffccff, 0 0 30px #ffffff;
+            animation: twinkle 1.5s infinite alternate;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.6; }
+            100% { opacity: 1; }
+        }
+
+        .love-letter {
+            font-size: 20px;
+            font-weight: bold;
+            color: #ff3399;
+            margin-top: 20px;
+        }
+
+        .countdown {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff3399;
+            margin: 20px 0;
+        }
+
+        .surprise-button {
+            background-color: #ff3399;
+            color: white;
+            padding: 15px 30px;
+            font-size: 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .surprise-button:hover {
+            background-color: #ff66b2;
+        }
+
+        .surprise-message {
+            display: none;
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff3399;
+            margin-top: 20px;
+        }
+
+        .hearts {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 30px;
+            color: #ff3399;
+            animation: float 5s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0% { top: 0; opacity: 1; }
+            100% { top: 100%; opacity: 0; }
+        }
+
+        footer {
+            margin-top: 30px;
+            font-size: 18px;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="christiana-name">Christiana ✨</div>
+        
+        <div class="countdown" id="countdown"></div>
+        
+        <div class="love-letter" id="love-letter"></div>
+        
+        <button class="surprise-button" onclick="showSurprise()">Surprise Me!</button>
+        
+        <div class="surprise-message" id="surprise-message"></div>
+    </div>
+
+    <footer>Designed by Abiodun Samuel</footer>
+
+    <script>
+        // Array of 30 love letters (each around 150 words)
+        const loveLetters = [
+            "My dearest Christiana, every moment with you is like a dream I never want to wake up from...",
+            "Christiana, you are the melody in my heart, the rhythm in my soul, and the harmony in my life...",
+            "Sweet Christiana, you light up my life like the stars light up the night sky...",
+            "Christiana, you are my heart's greatest adventure, my love, my world, my everything...",
+            "I never believed in fate until I met you, Christiana. Now, I know our love was written in the stars...",
+            "Dear Christiana, every heartbeat of mine whispers your name...",
+            "My love, Christiana, you are my forever, my always, my one true love...",
+            "To my beautiful Christiana, loving you is the best decision my heart ever made...",
+            "Christiana, you are my sunshine on cloudy days and my star on moonless nights...",
+            "I cherish every smile you give me, Christiana, for it brightens even my darkest days...",
+            "Christiana, our love is like a fairytale, but even better because it’s real...",
+            "Every second with you, Christiana, is a moment I hold dear to my soul...",
+            "Christiana, when I close my eyes, I see you, and when I open them, I wish to see you more...",
+            "Your love, Christiana, is the magic that turns my ordinary life into a beautiful masterpiece...",
+            "No matter where life takes me, Christiana, as long as I have you, I am home...",
+            "Christiana, loving you is my favorite thing in the world...",
+            "You make every moment special, Christiana, just by being in it...",
+            "My love for you, Christiana, grows stronger with every heartbeat...",
+            "Christiana, you are my forever and always...",
+            "I promise to love you endlessly, Christiana, for all the days of my life...",
+            "Christiana, you are the most precious treasure I have ever found...",
+            "I love you more than words can ever express, Christiana...",
+            "Christiana, your love is the fire that keeps my soul warm...",
+            "I thank the universe every day for blessing me with you, Christiana...",
+            "Christiana, if love had a face, it would look like you...",
+            "I never knew what true love was until I met you, Christiana...",
+            "Christiana, your love is the song my heart sings every day...",
+            "Every heartbeat of mine is a note in the love song I sing for you, Christiana...",
+            "Christiana, I could search the entire world and never find another you...",
+            "You are my soulmate, my heart, my love, my Christiana..."
+        ];
+
+        let index = 0;
+        function typeLoveLetter() {
+            if (index < loveLetters.length) {
+                document.getElementById("love-letter").innerHTML = loveLetters[index];
+                index = (index + 1) % loveLetters.length;
+                setTimeout(typeLoveLetter, 5000);
+            }
+        }
+        typeLoveLetter();
+
+        // Countdown Timer
+        const startDate = new Date("2023-01-01"); // Set to your anniversary/start date
+        function updateCountdown() {
+            const currentDate = new Date();
+            const difference = currentDate - startDate;
+            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            document.getElementById("countdown").innerHTML = `We've been together for ${days} days!`;
+        }
+        updateCountdown();
+
+        // Surprise Button
+        function showSurprise() {
+            document.getElementById("surprise-message").style.display = "block";
+            document.getElementById("surprise-message").innerHTML = "I love you forever, Christiana! 💖";
+        }
+    </script>
+
+</body>
+</html>
